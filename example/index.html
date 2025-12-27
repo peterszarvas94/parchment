@@ -4,6 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Parchment Editor Test</title>
+
+    <script type="module">
+      import { init, insertImage } from "../src/parchment.js";
+      import "../src/parchment.css";
+
+      // you should store image and get stored URL, not convert it to base64, this is only for demo
+      function toBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      const input = document.getElementById("upload");
+      input.addEventListener("change", async () => {
+        const file = input.files[0];
+        if (file && file.name !== "") {
+          const url = await toBase64(file);
+          insertImage(url);
+        }
+      });
+
+      const editor = init({
+        element: document.getElementById("editor"),
+        content: "<p>Start typing here...</p>",
+        onChange: (html) => {
+          document.getElementById("output").textContent = html;
+        },
+        handleImageClick: () => {
+          input.click();
+        },
+      });
+    </script>
   </head>
   <body>
     <h1>Parchment Editor</h1>
@@ -13,20 +48,6 @@
     <h2>Output:</h2>
     <output id="output"></output>
 
-    <script type="module">
-      import { init } from "../src/parchment.js";
-      import "../src/parchment.css";
-
-      let currentHtml = "";
-
-      const editor = init({
-        element: document.getElementById("editor"),
-        content: "<div>Start typing here...</div>",
-        onChange: (html) => {
-          currentHtml = html;
-          document.getElementById("output").textContent = html;
-        },
-      });
-    </script>
+    <input id="upload" type="file" accept="image/*" style="display: none" />
   </body>
 </html>

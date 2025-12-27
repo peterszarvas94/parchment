@@ -1,31 +1,32 @@
-const defaultParagraphSeparatorString = "defaultParagraphSeparator";
-export const formatBlock = "formatBlock";
-const addEventListener = (parent, type, listener) =>
-  parent.addEventListener(type, listener);
-const appendChild = (parent, child) => parent.appendChild(child);
-const createElement = (tag) => document.createElement(tag);
-export const queryCommandState = (command) =>
-  document.queryCommandState(command);
-const queryCommandValue = (command) => document.queryCommandValue(command);
+const DEFAULT_PARAGRAPH_SEPARATOR_STRING = "defaultParagraphSeparator";
+const FORMAT_BLOCK_STRING = "formatBlock";
 
-export const exec = (command, value = null) =>
-  document.execCommand(command, false, value);
+function addEventListener(parent, type, listener) {
+  return parent.addEventListener(type, listener);
+}
+
+function appendChild(parent, child) {
+  return parent.appendChild(child);
+}
+
+function createElement(tag) {
+  return document.createElement(tag);
+}
+
+export function queryCommandState(command) {
+  return document.queryCommandState(command);
+}
+
+function queryCommandValue(command) {
+  return document.queryCommandValue(command);
+}
+
+export function exec(command, value = null) {
+  return document.execCommand(command, false, value);
+}
 
 export function insertImage(url) {
-  const imgWrapper = document.createElement("div");
-  imgWrapper.classList.add("parchment-img-wrapper");
-  const img = document.createElement("img");
-  img.src = url;
-  imgWrapper.appendChild(img);
-
-  const sel = window.getSelection();
-  if (!sel.rangeCount) return;
-
-  const range = sel.getRangeAt(0);
-  let node = range.startContainer;
-  if (node.nodeType === Node.TEXT_NODE) node = node.parentNode;
-
-  node.after(imgWrapper);
+  exec("insertImage", url);
 }
 
 const defaultActions = [
@@ -61,25 +62,25 @@ const defaultActions = [
     name: "heading1",
     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heading1-icon lucide-heading-1"><path d="M4 12h8"/><path d="M4 18V6"/><path d="M12 18V6"/><path d="m17 12 3-2v8"/></svg>',
     title: "Heading 1",
-    result: () => exec(formatBlock, "<h1>"),
+    result: () => exec(FORMAT_BLOCK_STRING, "<h1>"),
   },
   {
     name: "heading2",
     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heading2-icon lucide-heading-2"><path d="M4 12h8"/><path d="M4 18V6"/><path d="M12 18V6"/><path d="M21 18h-4c0-4 4-3 4-6 0-1.5-2-2.5-4-1"/></svg>',
     title: "Heading 2",
-    result: () => exec(formatBlock, "<h2>"),
+    result: () => exec(FORMAT_BLOCK_STRING, "<h2>"),
   },
   {
     name: "paragraph",
     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pilcrow-icon lucide-pilcrow"><path d="M13 4v16"/><path d="M17 4v16"/><path d="M19 4H9.5a4.5 4.5 0 0 0 0 9H13"/></svg>',
     title: "Paragraph",
-    result: () => exec(formatBlock, "<p>"),
+    result: () => exec(FORMAT_BLOCK_STRING, "<p>"),
   },
   {
     name: "quote",
     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-quote-icon lucide-quote"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z"/></svg>',
     title: "Quote",
-    result: () => exec(formatBlock, "<blockquote>"),
+    result: () => exec(FORMAT_BLOCK_STRING, "<blockquote>"),
   },
   {
     name: "olist",
@@ -97,7 +98,7 @@ const defaultActions = [
     name: "code",
     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-icon lucide-code"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>',
     title: "Code",
-    result: () => exec(formatBlock, "<pre>"),
+    result: () => exec(FORMAT_BLOCK_STRING, "<pre>"),
   },
   {
     name: "line",
@@ -119,21 +120,8 @@ const defaultActions = [
     icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-image-icon lucide-image"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>',
     title: "Image",
     result: () => {
-      const input = document.createElement("input");
-      input.type = "file";
-      input.accept = "image/*";
-      input.style.display = "none";
-      input.addEventListener("change", async () => {
-        const file = input.files[0];
-        if (file && file.name !== "") {
-          const created = await uploadImage({ key: "test", file });
-          const url = getURLFromRecord(created);
-          if (url) insertImage(url);
-          document.body.removeChild(input);
-        }
-      });
-      document.body.appendChild(input);
-      input.click();
+      const url = window.prompt("Insert image url");
+      if (url) insertImage(url);
     },
   },
   {
@@ -201,17 +189,36 @@ const defaultClasses = {
 export const init = (settings) => {
   const actions = settings.actions
     ? settings.actions.map((action) => {
-        if (typeof action === "string") return defaultActions[action];
-        else if (defaultActions[action.name])
+        if (typeof action === "string") {
+          const defaultAction = defaultActions[action];
+          // Override image action with custom handler if provided
+          if (action === "image" && settings.handleImageClick) {
+            return {
+              ...defaultAction,
+              result: settings.handleImageClick,
+            };
+          }
+          return defaultAction;
+        } else if (defaultActions[action.name])
           return { ...defaultActions[action.name], ...action };
         return action;
       })
-    : Object.keys(defaultActions).map((action) => defaultActions[action]);
+    : Object.keys(defaultActions).map((action) => {
+        const defaultAction = defaultActions[action];
+        // Override image action with custom handler if provided
+        if (defaultAction.name === "image" && settings.handleImageClick) {
+          return {
+            ...defaultAction,
+            result: settings.handleImageClick,
+          };
+        }
+        return defaultAction;
+      });
 
   const classes = { ...defaultClasses, ...settings.classes };
 
-  const defaultParagraphSeparator =
-    settings[defaultParagraphSeparatorString] || "div";
+  const paragraphSeparator =
+    settings[DEFAULT_PARAGRAPH_SEPARATOR_STRING] || "p";
 
   const actionbar = createElement("div");
   actionbar.className = classes.actionbar;
@@ -224,16 +231,16 @@ export const init = (settings) => {
   content.className = classes.content;
   content.oninput = ({ target: { firstChild } }) => {
     if (firstChild && firstChild.nodeType === 3)
-      exec(formatBlock, `<${defaultParagraphSeparator}>`);
+      exec(FORMAT_BLOCK_STRING, `<${paragraphSeparator}>`);
     else if (content.innerHTML === "<br>") content.innerHTML = "";
     settings.onChange(content.innerHTML);
   };
   content.onkeydown = (event) => {
     if (
       event.key === "Enter" &&
-      queryCommandValue(formatBlock) === "blockquote"
+      queryCommandValue(FORMAT_BLOCK_STRING) === "blockquote"
     ) {
-      setTimeout(() => exec(formatBlock, `<${defaultParagraphSeparator}>`), 0);
+      setTimeout(() => exec(FORMAT_BLOCK_STRING, `<${paragraphSeparator}>`), 0);
     }
   };
   appendChild(settings.element, content);
@@ -258,6 +265,6 @@ export const init = (settings) => {
   });
 
   if (settings.styleWithCSS) exec("styleWithCSS");
-  exec(defaultParagraphSeparatorString, defaultParagraphSeparator);
+  exec(DEFAULT_PARAGRAPH_SEPARATOR_STRING, paragraphSeparator);
   return settings.element;
 };
