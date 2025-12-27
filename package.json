@@ -1,17 +1,17 @@
 {
-  "name": "parchment",
+  "name": "nanotext",
   "description": "parchment - the simplest and smallest WYSIWYG text editor for web, with no dependencies",
   "author": "Peter Szarvas",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/parchment.umd.js",
-  "module": "./dist/parchment.es.js",
+  "main": "./dist/nanotext.umd.js",
+  "module": "./dist/nanotext.es.js",
   "exports": {
     ".": {
-      "import": "./dist/parchment.es.js",
-      "require": "./dist/parchment.umd.js"
+      "import": "./dist/nanotext.es.js",
+      "require": "./dist/nanotext.umd.js"
     },
-    "./dist/parchment.css": "./dist/parchment.css"
+    "./dist/nanotext.css": "./dist/nanotext.css"
   },
   "files": [
     "dist",
@@ -33,12 +33,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/peterszarvas94/parchment.git"
+    "url": "git+https://github.com/peterszarvas94/nanotext.git"
   },
   "bugs": {
-    "url": "https://github.com/peterszarvas94/parchment/issues"
+    "url": "https://github.com/peterszarvas94/nanotext/issues"
   },
-  "homepage": "https://github.com/peterszarvas94/parchment#readme",
+  "homepage": "https://github.com/peterszarvas94/nanotext#readme",
   "devDependencies": {
     "vite": "^5.4.21"
   }

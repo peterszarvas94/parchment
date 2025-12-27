@@ -1,4 +1,4 @@
-# Parchment
+# Nanotext
 
 A simple and lightweight WYSIWYG text editor for web with no dependencies.
 
@@ -7,8 +7,8 @@ Forked from [pell](https://github.com/jaredreich/pell).
 ## Usage
 
 ```javascript
-import { init } from 'parchment';
-import 'parchment/dist/parchment.css';
+import { init } from 'nanotext';
+import 'nanotext/dist/nanotext.css';
 
 const editor = init({
   element: document.getElementById('editor'),

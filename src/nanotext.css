@@ -1,11 +1,11 @@
-.parchment-content {
+.nanotext-content {
   box-sizing: border-box;
   outline: 0;
   overflow-y: auto;
   padding: 10px 0;
 }
 
-.parchment-actionbar {
+.nanotext-actionbar {
   background-color: #fff;
   border-bottom: 1px solid rgba(10, 10, 10, 0.1);
   position: sticky;
@@ -18,7 +18,7 @@
   flex-wrap: wrap;
 }
 
-.parchment-button {
+.nanotext-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -30,11 +30,11 @@
   justify-content: center;
 }
 
-.parchment-button-selected {
+.nanotext-button-selected {
   background-color: #f0f0f0;
 }
 
-.parchment-img-wrapper {
+.nanotext-img-wrapper {
   display: flex;
 
   img {

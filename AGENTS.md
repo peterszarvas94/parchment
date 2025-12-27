@@ -1,14 +1,14 @@
-# Agent Guidelines for Parchment
+# Agent Guidelines for Nanotext
 
-This document provides coding guidelines and conventions for AI coding agents working on the Parchment WYSIWYG editor codebase.
+This document provides coding guidelines and conventions for AI coding agents working on the Nanotext WYSIWYG editor codebase.
 
 ## Project Overview
 
-Parchment is a lightweight, dependency-free WYSIWYG text editor forked from Pell. It uses vanilla JavaScript and CSS with a focus on simplicity and minimal bundle size.
+Nanotext is a lightweight, dependency-free WYSIWYG text editor forked from Pell. It uses vanilla JavaScript and CSS with a focus on simplicity and minimal bundle size.
 
 **Key Files:**
-- `src/parchment.js` - Main editor implementation
-- `src/parchment.css` - Editor styling
+- `src/nanotext.js` - Main editor implementation
+- `src/nanotext.css` - Editor styling
 - `example/index.html` - Demo/test page
 - `vite.config.js` - Build configuration
 
@@ -55,7 +55,7 @@ export const init = (settings) => { ... };
 #### Naming Conventions
 - **Variables/Functions:** camelCase (`defaultActions`, `createElement`, `insertImage`)
 - **Constants:** camelCase for string constants (`defaultParagraphSeparatorString`)
-- **CSS Classes:** kebab-case with `parchment-` prefix (`parchment-button`, `parchment-actionbar`)
+- **CSS Classes:** kebab-case with `nanotext-` prefix (`nanotext-button`, `nanotext-actionbar`)
 - **Internal helpers:** camelCase, not exported unless needed externally
 
 #### Functions
@@ -132,9 +132,9 @@ if (!sel.rangeCount) return;
 ### CSS
 
 #### Naming
-- All classes use `parchment-` prefix
+- All classes use `nanotext-` prefix
 - Use kebab-case for class names
-- Descriptive names based on purpose (`parchment-actionbar`, `parchment-button-selected`)
+- Descriptive names based on purpose (`nanotext-actionbar`, `nanotext-button-selected`)
 
 #### Structure
 - Group related selectors
@@ -142,13 +142,13 @@ if (!sel.rangeCount) return;
 - Keep specificity low (single class selectors preferred)
 
 ```css
-.parchment-button {
+.nanotext-button {
   background-color: transparent;
   border: none;
   cursor: pointer;
 }
 
-.parchment-button-selected {
+.nanotext-button-selected {
   background-color: #f0f0f0;
 }
 ```
@@ -215,13 +215,13 @@ const editor = init({
 
 ## Migration Notes
 
-This project was forked from Pell and is being renamed to Parchment. When making changes:
-- Use `parchment-` prefix for new CSS classes (not `pell-`)
-- Update any remaining `pell` references to `parchment`
+This project was forked from Pell and is being renamed to Nanotext. When making changes:
+- Use `nanotext-` prefix for new CSS classes (not `pell-`)
+- Update any remaining `pell` references to `nanotext`
 - Maintain backward compatibility where reasonable
 - Update package.json metadata when making significant changes
 
 ## File Naming
-- Source files: `parchment.js`, `parchment.css`
-- Package main: `./src/parchment.js`
+- Source files: `nanotext.js`, `nanotext.css`
+- Package main: `./src/nanotext.js`
 - Keep example files in `example/` directory

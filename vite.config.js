@@ -17,14 +17,14 @@ export default defineConfig(({ mode }) => {
     build: {
       minify: false,
       lib: {
-        entry: resolve(__dirname, 'src/parchment.js'),
-        name: 'Parchment',
-        fileName: (format) => `parchment.${format}.js`,
+        entry: resolve(__dirname, 'src/nanotext.js'),
+        name: 'Nanotext',
+        fileName: (format) => `nanotext.${format}.js`,
         formats: ['es', 'umd'],
       },
       rollupOptions: {
         output: {
-          assetFileNames: 'parchment.[ext]',
+          assetFileNames: 'nanotext.[ext]',
         },
       },
     },
