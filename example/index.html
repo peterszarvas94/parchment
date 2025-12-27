@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parchment Editor Test</title>
+  </head>
+  <body>
+    <h1>Parchment Editor</h1>
+
+    <div id="editor"></div>
+
+    <h2>Output:</h2>
+    <output id="output"></output>
+
+    <script type="module">
+      import { init } from "../src/parchment.js";
+      import "../src/parchment.css";
+
+      let currentHtml = "";
+
+      const editor = init({
+        element: document.getElementById("editor"),
+        content: "<div>Start typing here...</div>",
+        onChange: (html) => {
+          currentHtml = html;
+          document.getElementById("output").textContent = html;
+        },
+      });
+    </script>
+  </body>
+</html>
