@@ -3,11 +3,15 @@
 import { execSync } from 'child_process';
 import { readFileSync } from 'fs';
 
-function run(command, silent = false) {
+function run(command, silent = false, interactive = false) {
   try {
-    const output = execSync(command, { encoding: 'utf-8' });
-    if (!silent) console.log(output);
-    return output.trim();
+    const options = { encoding: 'utf-8' };
+    if (interactive) {
+      options.stdio = 'inherit';
+    }
+    const output = execSync(command, options);
+    if (!silent && !interactive) console.log(output);
+    return interactive ? '' : output.trim();
   } catch (error) {
     console.error(`Error: ${error.message}`);
     process.exit(1);
@@ -60,7 +64,7 @@ console.log(`✓ GitHub release created: https://github.com/peterszarvas94/nanot
 
 console.log('📦 Publishing to npm...');
 console.log('⚠️  You will need to enter your 2FA code when prompted.\n');
-run('npm publish');
+run('npm publish', false, true);
 console.log('\n✓ Published to npm\n');
 
 console.log('🎉 Release complete!');
