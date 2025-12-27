@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanotext - Minimal Init Test</title>
+    <link rel="stylesheet" href="../src/nanotext.css">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        h1 {
+            color: #333;
+        }
+        .test-case {
+            margin: 2rem 0;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        .test-case h2 {
+            margin-top: 0;
+            color: #666;
+            font-size: 1.2em;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Nanotext Minimal Init Tests</h1>
+
+    <div class="test-case">
+        <h2>Test 1: <code>init()</code> - No arguments</h2>
+        <p>Should append to document.body with all default actions</p>
+        <div id="result1"></div>
+    </div>
+
+    <div class="test-case">
+        <h2>Test 2: <code>init({})</code> - Empty object</h2>
+        <p>Should append to document.body with all default actions</p>
+        <div id="result2"></div>
+    </div>
+
+    <div class="test-case">
+        <h2>Test 3: <code>init({ element: ... })</code> - Only element</h2>
+        <p>Should work with just an element specified</p>
+        <div id="editor3"></div>
+    </div>
+
+    <script type="module">
+        import { init } from '../src/nanotext.js';
+
+        try {
+            // Test 1: init() with no arguments
+            console.log('Test 1: init()');
+            const editor1 = init();
+            document.getElementById('result1').innerHTML = 
+                `<strong style="color: green;">✓ Success!</strong> Editor created and appended to body`;
+            console.log('✓ Test 1 passed');
+        } catch (error) {
+            document.getElementById('result1').innerHTML = 
+                `<strong style="color: red;">✗ Failed:</strong> ${error.message}`;
+            console.error('✗ Test 1 failed:', error);
+        }
+
+        try {
+            // Test 2: init({}) with empty object
+            console.log('Test 2: init({})');
+            const editor2 = init({});
+            document.getElementById('result2').innerHTML = 
+                `<strong style="color: green;">✓ Success!</strong> Editor created and appended to body`;
+            console.log('✓ Test 2 passed');
+        } catch (error) {
+            document.getElementById('result2').innerHTML = 
+                `<strong style="color: red;">✗ Failed:</strong> ${error.message}`;
+            console.error('✗ Test 2 failed:', error);
+        }
+
+        try {
+            // Test 3: init({ element }) with only element
+            console.log('Test 3: init({ element })');
+            const editor3 = init({
+                element: document.getElementById('editor3')
+            });
+            console.log('✓ Test 3 passed');
+        } catch (error) {
+            document.getElementById('editor3').innerHTML = 
+                `<strong style="color: red;">✗ Failed:</strong> ${error.message}`;
+            console.error('✗ Test 3 failed:', error);
+        }
+
+        console.log('\n🎉 All tests completed! Check results above.');
+    </script>
+</body>
+</html>
