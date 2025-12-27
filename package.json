@@ -22,6 +22,7 @@
     "build": "vite build && cp src/nanotext.css dist/nanotext.css",
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
+    "publish:npm": "node scripts/publish.js",
     "release": "node scripts/release.js",
     "release:patch": "node scripts/release.js patch",
     "release:minor": "node scripts/release.js minor",
