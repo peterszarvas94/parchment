@@ -4,14 +4,83 @@ The simplest WYSIWYG text editor for web. ~15KB, no dependencies.
 
 Forked from [pell](https://github.com/jaredreich/pell).
 
-## Install
+## Usage
 
+<details>
+<summary><strong>1. CDN (Quick Start)</strong></summary>
+
+Directly from CDN for quick prototypes:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nanotext/dist/nanotext.css">
+</head>
+<body>
+  <div id="editor"></div>
+  <script type="module">
+    import { init } from "https://cdn.jsdelivr.net/npm/nanotext/dist/nanotext.js";
+    
+    const editor = init({
+      element: document.getElementById("editor"),
+      onChange: (html) => console.log(html),
+    });
+  </script>
+</body>
+</html>
+```
+
+</details>
+
+<details>
+<summary><strong>2. Download + Import Map</strong></summary>
+
+Download files first for offline/local usage:
+
+```bash
+git clone https://github.com/szarvaspeter/nanotext.git
+# or download from: https://github.com/szarvaspeter/nanotext/releases
+```
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="./dist/nanotext.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "nanotext": "./dist/nanotext.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="editor"></div>
+  <script type="module">
+    import { init } from "nanotext";
+    
+    const editor = init({
+      element: document.getElementById("editor"),
+      onChange: (html) => console.log(html),
+    });
+  </script>
+</body>
+</html>
+```
+
+</details>
+
+<details>
+<summary><strong>3. NPM Package</strong></summary>
+
+Install:
 ```bash
 npm install nanotext
 ```
 
-## Usage
-
+Usage:
 ```javascript
 import { init } from "nanotext";
 import "nanotext/dist/nanotext.css";
@@ -22,7 +91,11 @@ const editor = init({
 });
 ```
 
-See full example in `/examples`.
+> Note: NPM package provides built files from `dist/` directory. Source TypeScript files are in `src/` for development.
+
+</details>
+
+See full example in `example/index.html`.
 
 ## Options
 
