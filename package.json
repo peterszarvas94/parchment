@@ -8,8 +8,14 @@
   "module": "./dist/nanotext.es.js",
   "exports": {
     ".": {
-      "import": "./dist/nanotext.es.js",
-      "require": "./dist/nanotext.umd.js"
+      "import": {
+        "types": "./dist/nanotext.d.ts",
+        "default": "./dist/nanotext.es.js"
+      },
+      "require": {
+        "types": "./dist/nanotext.d.ts",
+        "default": "./dist/nanotext.umd.js"
+      }
     },
     "./dist/nanotext.css": "./dist/nanotext.css"
   },
@@ -19,7 +25,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp src/nanotext.css dist/nanotext.css",
+    "build": "vite build && cp src/nanotext.css dist/nanotext.css && npx tsc",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -35,7 +41,9 @@
     "editor",
     "rich text",
     "wysiwyg",
-    "contenteditable"
+    "contenteditable",
+    "typescript",
+    "types"
   ],
   "license": "MIT",
   "repository": {
