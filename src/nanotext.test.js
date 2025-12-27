@@ -102,3 +102,41 @@ describe('insertImage', () => {
     expect(insertImage.length).toBe(1);
   });
 });
+
+describe('Action Merging', () => {
+  it('should merge partial action with defaults', () => {
+    const boldDefault = defaultActions.find(a => a.name === 'bold');
+    const userAction = { name: 'bold', icon: 'B' };
+    const merged = { ...boldDefault, ...userAction };
+
+    expect(merged.icon).toBe('B'); // Overridden
+    expect(merged.title).toBe('Bold'); // Preserved
+    expect(typeof merged.result).toBe('function'); // Preserved
+    expect(typeof merged.state).toBe('function'); // Preserved
+  });
+
+  it('should override multiple properties while preserving others', () => {
+    const boldDefault = defaultActions.find(a => a.name === 'bold');
+    const userAction = { name: 'bold', icon: 'B', title: 'Custom Bold' };
+    const merged = { ...boldDefault, ...userAction };
+
+    expect(merged.icon).toBe('B'); // Overridden
+    expect(merged.title).toBe('Custom Bold'); // Overridden
+    expect(typeof merged.result).toBe('function'); // Preserved
+    expect(typeof merged.state).toBe('function'); // Preserved
+  });
+
+  it('should use custom action when no default exists', () => {
+    const userAction = {
+      name: 'customAction',
+      icon: '🎨',
+      title: 'Custom',
+      result: () => {}
+    };
+    const defaultAction = defaultActions.find(a => a.name === 'customAction');
+    const merged = defaultAction ? { ...defaultAction, ...userAction } : userAction;
+
+    expect(merged).toBe(userAction);
+    expect(merged.name).toBe('customAction');
+  });
+});

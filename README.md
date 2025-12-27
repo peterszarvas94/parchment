@@ -39,6 +39,25 @@ See full example in `/examples`.
 
 bold, italic, underline, strikethrough, heading1, heading2, paragraph, quote, olist, ulist, code, line, link, image, justifyLeft, justifyCenter, justifyRight, justifyFull, subscript, superscript, undo, redo
 
+### Custom Actions
+
+You can override default action properties or add custom actions:
+
+```javascript
+init({
+  actions: [
+    'bold',                           // Use default
+    { name: 'italic', icon: 'I' },    // Override just icon
+    { 
+      name: 'custom',                 // Custom action
+      icon: '🎨',
+      title: 'Custom Action',
+      result: () => alert('Custom!')
+    }
+  ]
+});
+```
+
 ## License
 
 MIT
